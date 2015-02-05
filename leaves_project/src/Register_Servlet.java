@@ -26,16 +26,20 @@ public class Register_Servlet extends HttpServlet {
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-    	String user=request.getParameter("usermail"); 
-    	String pass=request.getParameter("password"); 
-    	
+    	String name=request.getParameter("name"); 
+    	String email=request.getParameter("email"); 
+    	String dept=request.getParameter("dept");
+    	String desig=request.getParameter("desig");
+    	String type=request.getParameter("type");
+    	String eid=request.getParameter("eid");
+    	String password=request.getParameter("psw");
     	
 		con=Connectivity.getConnection();
 		int n=0;
 		try
 		{
 			st=con.createStatement();
-			String query = "INSERT INTO register(username, password) VALUES('"+user+"','"+pass+"')";
+			String query = "INSERT INTO employees(Name,id,Type,Emailid,password,designation,department) VALUES('"+name+"','"+eid+"','"+type+"','"+email+"','"+password+"','"+desig+"','"+dept+"');";
 			System.out.println(query);
 			n=st.executeUpdate(query);
 			if(n>0)

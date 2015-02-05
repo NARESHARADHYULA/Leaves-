@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+
 /**
  * Servlet implementation class Signup_Servlet
  */
@@ -31,19 +33,38 @@ public class Signup_Servlet extends HttpServlet
     	String pass=request.getParameter("password"); 
     	
 		con=Connectivity.getConnection();
+		
 		int n=0;
 		try
 		{
 			st=con.createStatement();
-			String query = "INSERT INTO register(username, password) VALUES('"+user+"','"+pass+"')";
+			String query = "select Name , password FROM Employees WHERE  Emailid = '"+user+"' ";
 			System.out.println(query);
-			n=st.executeUpdate(query);
-			if(n>0)
-			{
-				PrintWriter pw=response.getWriter();
-				pw.println("values updated");
-			}
+			ResultSet rs=st.executeQuery(query);
+			
+				while(rs.next())
+				{					
+					String password = rs.getString(1);
+					String name = rs.getString(2);
+					PrintWriter pw=response.getWriter();
+					/*String type = rs.getString(3);
+					String email = rs.getString(4);
+					String password = rs.getString(5);
+					String designation = rs.getString(6);
+					String department = rs.getString(7);
+					PrintWriter pw=response.getWriter();
+					pw.println("values updated");	
+					pw.println("Email : "+email);
+					pw.println("Password: "+password);
+					pw.println("Name: "+name);
+					pw.println("Id: "+id);
+					pw.println("designation: "+designation);
+					pw.println("department: "+department);*/
+					pw.println("Name: "+name);
+				}		
+				rs.close();
 		}
+			
 		catch (SQLException e)
 		{
 			e.printStackTrace();

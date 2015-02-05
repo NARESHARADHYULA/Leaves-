@@ -11,7 +11,7 @@ public class Connectivity
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("driver loaded");
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/login","root","root");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/leavedata","root","root");
 			System.out.println("con======"+con);
 			System.out.println("Connection established");
 		}
